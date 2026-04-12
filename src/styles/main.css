@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-size: 13px;
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fadeIn 0.15s ease-out; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse { animation: pulse 2s ease-in-out infinite; }
+
+/* Collapsible section animation */
+@keyframes expandDown {
+  from { max-height: 0; opacity: 0; }
+  to { max-height: 800px; opacity: 1; }
+}
+@keyframes collapseUp {
+  from { max-height: 800px; opacity: 1; }
+  to { max-height: 0; opacity: 0; }
+}
+.section-content {
+  overflow: hidden;
+  animation: expandDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.section-content.collapsed {
+  animation: collapseUp 0.2s ease-out forwards;
+}
+
+/* Card */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Section header - clickable */
+.section-header {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.1s ease;
+  border-radius: 14px;
+}
+.section-header:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Chevron */
+.chevron {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+}
+.chevron.open {
+  transform: rotate(90deg);
+}
+
+/* Session row */
+.session-row {
+  padding: 8px 14px 8px 32px;
+  cursor: grab;
+  transition: background 0.1s ease;
+  border-radius: 8px;
+  margin: 0 4px;
+}
+.session-row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.session-row:active {
+  cursor: grabbing;
+  opacity: 0.6;
+}
+.session-row:last-child {
+  margin-bottom: 4px;
+}
+
+/* Tool badge */
+.tool-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 6px;
+  line-height: 14px;
+}
+
+/* Buttons */
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-restore {
+  background: rgba(139, 92, 246, 0.9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.1s ease;
+}
+.btn-restore:hover { background: rgba(139, 92, 246, 1); }

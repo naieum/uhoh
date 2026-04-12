@@ -1,0 +1,20 @@
+FROM rust:1.90-bookworm
+
+RUN apt-get update && apt-get install -y \
+    libwebkit2gtk-4.1-dev \
+    libappindicator3-dev \
+    librsvg2-dev \
+    patchelf \
+    libssl-dev \
+    libayatana-appindicator3-dev \
+    curl \
+    wget \
+    file \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js 22
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+src-tauri/target/
+*.dmg
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+
+# Unrelated files in this directory
+hotel-network-vulnerability-report.txt
+quadcode-source/
