@@ -18,7 +18,10 @@ uhoh watches for running AI coding assistant processes across your system. When 
 Download the latest release from [Releases](https://github.com/naieum/uhoh/releases).
 
 - **macOS:** Download the `.dmg`, open it, drag uhoh to Applications
-- **Linux / Windows:** Build from source (see below)
+- **Linux (deb):** `sudo dpkg -i uhoh_0.1.0_amd64.deb` -- shows up in your app launcher
+- **Linux (AppImage):** `chmod +x uhoh_*.AppImage && ./uhoh_*.AppImage`
+- **Linux (GNOME users):** Install the [AppIndicator extension](https://extensions.gnome.org/extension/615/appindicator-support/) for the tray icon to appear
+- **Windows:** Download the `.msi` or `.exe` installer from Releases
 
 ### Building from source
 

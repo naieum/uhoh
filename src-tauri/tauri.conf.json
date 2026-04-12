@@ -30,6 +30,13 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "category": "DeveloperTool",
+    "shortDescription": "Session monitor and recovery tool for AI coding assistants",
+    "linux": {
+      "deb": {
+        "depends": ["libwebkit2gtk-4.1-0", "libappindicator3-1"]
+      }
+    },
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
