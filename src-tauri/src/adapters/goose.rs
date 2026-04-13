@@ -5,10 +5,6 @@ use crate::state::SessionMeta;
 pub struct GooseAdapter;
 
 impl ToolAdapter for GooseAdapter {
-    fn tool_name(&self) -> &'static str {
-        "goose"
-    }
-
     fn resolve_metadata(&self, _process: &DetectedProcess) -> SessionMeta {
         // Goose stores sessions in SQLite at ~/.local/share/goose/sessions/sessions.db
         // We use the CLI resume command which handles session lookup internally

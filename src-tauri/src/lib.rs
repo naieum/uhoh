@@ -140,6 +140,13 @@ pub fn run() {
     let app_state: SharedState = Arc::new(Mutex::new(AppState::new()));
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            // If a second instance launches, show the existing window
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.show();
+                let _ = window.set_focus();
+            }
+        }))
         .plugin(tauri_plugin_shell::init())
         .manage(app_state.clone())
         .invoke_handler(tauri::generate_handler![
@@ -180,7 +187,7 @@ pub fn run() {
 
             let _tray = TrayIconBuilder::with_id("main-tray")
                 .icon(icon)
-                .icon_as_template(true)
+                .icon_as_template(false)
                 .tooltip("uhoh - AI Session Monitor")
                 .on_tray_icon_event(|tray, event| {
                     if let tauri::tray::TrayIconEvent::Click {

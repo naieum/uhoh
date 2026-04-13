@@ -100,24 +100,8 @@ impl Coordinator {
 
         for process in &processes {
             let adapter = adapters::get_adapter(&process.tool);
-            let meta = adapter.resolve_metadata(&crate::libproc_scanner::DetectedProcess {
-                pid: process.pid,
-                tool: process.tool.clone(),
-                tool_color: process.tool_color.clone(),
-                comm: process.comm.clone(),
-                cwd: process.cwd.clone(),
-                args: process.args.clone(),
-                start_time: process.start_time,
-            });
-            let resume_cmd = adapter.resume_command(&crate::libproc_scanner::DetectedProcess {
-                pid: process.pid,
-                tool: process.tool.clone(),
-                tool_color: process.tool_color.clone(),
-                comm: process.comm.clone(),
-                cwd: process.cwd.clone(),
-                args: process.args.clone(),
-                start_time: process.start_time,
-            }, &meta);
+            let meta = adapter.resolve_metadata(process);
+            let resume_cmd = adapter.resume_command(process, &meta);
 
             let id = if let Some(ref sid) = meta.session_id {
                 format!("{}:{}", process.tool, sid)
@@ -502,19 +486,8 @@ impl Coordinator {
 
         for process in &processes {
             let adapter = adapters::get_adapter(&process.tool);
-
-            let compat = crate::libproc_scanner::DetectedProcess {
-                pid: process.pid,
-                tool: process.tool.clone(),
-                tool_color: process.tool_color.clone(),
-                comm: process.comm.clone(),
-                cwd: process.cwd.clone(),
-                args: process.args.clone(),
-                start_time: process.start_time,
-            };
-
-            let meta = adapter.resolve_metadata(&compat);
-            let resume_cmd = adapter.resume_command(&compat, &meta);
+            let meta = adapter.resolve_metadata(process);
+            let resume_cmd = adapter.resume_command(process, &meta);
 
             let id = if let Some(ref sid) = meta.session_id {
                 format!("{}:{}", process.tool, sid)
@@ -564,12 +537,13 @@ impl Coordinator {
         // Check for sessions that are Active but no longer running
         let mut newly_dead = Vec::new();
         for (id, session) in s.sessions.iter_mut() {
-            if session.status == SessionStatus::Active && !alive_ids.contains(id) {
-                if !libproc_scanner::is_pid_alive(session.pid) {
-                    session.status = SessionStatus::Ended;
-                    session.last_seen = now;
-                    newly_dead.push(id.clone());
-                }
+            if session.status == SessionStatus::Active
+                && !alive_ids.contains(id)
+                && !libproc_scanner::is_pid_alive(session.pid)
+            {
+                session.status = SessionStatus::Ended;
+                session.last_seen = now;
+                newly_dead.push(id.clone());
             }
         }
 

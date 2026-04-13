@@ -5,7 +5,7 @@ use tokio::sync::mpsc;
 #[derive(Debug, Clone)]
 pub enum FsEvent {
     SessionFileCreated { tool: String, path: PathBuf },
-    SessionFileDeleted { tool: String, path: PathBuf },
+    SessionFileDeleted { tool: String, #[allow(dead_code)] path: PathBuf },
 }
 
 /// Session directories to watch per tool

@@ -10,6 +10,7 @@ pub enum SessionStatus {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default)]
 pub struct SessionMeta {
     pub summary: Option<String>,
     pub first_prompt: Option<String>,
@@ -17,19 +18,6 @@ pub struct SessionMeta {
     pub git_branch: Option<String>,
     pub session_id: Option<String>,
     pub session_name: Option<String>,
-}
-
-impl Default for SessionMeta {
-    fn default() -> Self {
-        Self {
-            summary: None,
-            first_prompt: None,
-            message_count: None,
-            git_branch: None,
-            session_id: None,
-            session_name: None,
-        }
-    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

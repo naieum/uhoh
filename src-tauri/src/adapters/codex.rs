@@ -50,10 +50,6 @@ fn find_recent_session(cwd: &str) -> Option<(String, Option<String>)> {
 }
 
 impl ToolAdapter for CodexAdapter {
-    fn tool_name(&self) -> &'static str {
-        "codex"
-    }
-
     fn resolve_metadata(&self, process: &DetectedProcess) -> SessionMeta {
         let cwd = process.cwd.as_deref().unwrap_or("~");
 

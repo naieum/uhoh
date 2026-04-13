@@ -5,10 +5,6 @@ use crate::state::SessionMeta;
 pub struct GeminiAdapter;
 
 impl ToolAdapter for GeminiAdapter {
-    fn tool_name(&self) -> &'static str {
-        "gemini"
-    }
-
     fn resolve_metadata(&self, process: &DetectedProcess) -> SessionMeta {
         // Gemini stores sessions in ~/.gemini/history/ and project-specific chats
         // For now, extract what we can from the process args

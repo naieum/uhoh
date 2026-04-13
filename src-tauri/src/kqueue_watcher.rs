@@ -110,8 +110,7 @@ mod macos {
                 break;
             }
 
-            for i in 0..n as usize {
-                let ev = &events[i];
+            for ev in events.iter().take(n as usize) {
 
                 if ev.filter == libc::EVFILT_READ && ev.ident == pipe_read_fd as libc::uintptr_t {
                     let mut buf = [0u8; 64];
@@ -143,7 +142,7 @@ mod macos {
                     }
                 } else if ev.filter == libc::EVFILT_PROC {
                     let pid = ev.ident as u32;
-                    if ev.fflags & (libc::NOTE_EXIT as u32) != 0 {
+                    if ev.fflags & libc::NOTE_EXIT != 0 {
                         let _ = event_tx.send(ProcessEvent::Exited { pid });
                     }
                 }

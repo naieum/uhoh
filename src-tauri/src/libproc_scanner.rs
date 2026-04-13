@@ -54,7 +54,7 @@ fn is_interpreter(path: &str) -> bool {
     let bin_name = path.rsplit('/').next().unwrap_or(path);
     // On Windows, also handle backslash separators
     let bin_name = bin_name.rsplit('\\').next().unwrap_or(bin_name);
-    SCRIPT_INTERPRETERS.iter().any(|&i| bin_name == i)
+    SCRIPT_INTERPRETERS.contains(&bin_name)
 }
 
 // ============================================================
@@ -312,7 +312,7 @@ mod generic {
                             cwd,
                             args,
                             start_time: process.start_time(),
-                        });
+                            });
                     }
                 }
             }

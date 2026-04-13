@@ -66,10 +66,6 @@ fn read_session_metadata(cwd: &str, session_id: &str) -> Option<SessionIndexEntr
 }
 
 impl ToolAdapter for ClaudeAdapter {
-    fn tool_name(&self) -> &'static str {
-        "claude"
-    }
-
     fn resolve_metadata(&self, process: &DetectedProcess) -> SessionMeta {
         // Try to read the PID session file first
         let session_file = read_session_file(process.pid);
@@ -108,4 +104,5 @@ impl ToolAdapter for ClaudeAdapter {
             format!("cd {} && claude --continue", cwd)
         }
     }
+
 }

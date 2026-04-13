@@ -5,10 +5,6 @@ use crate::state::SessionMeta;
 pub struct AiderAdapter;
 
 impl ToolAdapter for AiderAdapter {
-    fn tool_name(&self) -> &'static str {
-        "aider"
-    }
-
     fn resolve_metadata(&self, _process: &DetectedProcess) -> SessionMeta {
         // Aider has limited session persistence (.aider.chat.history.md)
         // No native resume support

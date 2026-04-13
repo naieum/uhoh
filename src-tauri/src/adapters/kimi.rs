@@ -5,10 +5,6 @@ use crate::state::SessionMeta;
 pub struct KimiAdapter;
 
 impl ToolAdapter for KimiAdapter {
-    fn tool_name(&self) -> &'static str {
-        "kimi"
-    }
-
     fn resolve_metadata(&self, _process: &DetectedProcess) -> SessionMeta {
         // Kimi stores sessions in ~/.kimi/sessions/ with wire.jsonl and context.jsonl
         // Could read from there for richer metadata in the future

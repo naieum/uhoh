@@ -11,7 +11,6 @@ use crate::state::SessionMeta;
 
 /// Trait for tool-specific session handling
 pub trait ToolAdapter: Send + Sync {
-    fn tool_name(&self) -> &'static str;
     fn resolve_metadata(&self, process: &DetectedProcess) -> SessionMeta;
     fn resume_command(&self, process: &DetectedProcess, meta: &SessionMeta) -> String;
 }
@@ -34,10 +33,6 @@ pub fn get_adapter(tool: &str) -> Box<dyn ToolAdapter> {
 struct GenericAdapter;
 
 impl ToolAdapter for GenericAdapter {
-    fn tool_name(&self) -> &'static str {
-        "unknown"
-    }
-
     fn resolve_metadata(&self, _process: &DetectedProcess) -> SessionMeta {
         SessionMeta::default()
     }
